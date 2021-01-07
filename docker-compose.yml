@@ -1,0 +1,22 @@
+#ARG OS_VERSION=14.04
+#FROM Ubuntu:${OS_VERSION}
+
+version: "2"
+services:
+  tomcat:
+    image: "tomcat:7"
+    container_name: appserver
+    ports:
+      - "8080:80"
+    depends_on:
+      - db
+  db:
+    image: "mysql:5.7"
+    container_name: dbserver
+    ports:
+      - "3306:3306"
+    environment:
+      - MYSQL_ROOT_PASSWORD=sample
+      - MYSQL_DATABASE=helpdesk
+      - MYSQL_USER=helpdesk
+      - MYSQL_PASSWORD=helpdesk

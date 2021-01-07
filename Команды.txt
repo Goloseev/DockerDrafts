@@ -1,0 +1,9 @@
+docker run --name myDatabase -e MYSQL_ROOT_PASSWORD=myPassword -d mysql:latest
+ключ --rm удаляет контейнер после остановки
+
+docker logs id
+
+RUN npm install > /dev/null
+RUN git clone -q https://github.com/docker-in-practice/todo.git
+
+docker tag 66c76cea05bb todoapp
