@@ -1,2 +1,11 @@
 Сервер терминалов для 1С по протоколу RDP на linux: рекомендации по настройке с учетом опыта реальной эксплуатации
 https://habr.com/ru/post/325132/
+
+
+Для удобства ввода команд для последующей установки необходимо установить OpenSSH-сервер:
+sudo apt-get install openssh-server
+sudo restart ssh
+
+При активированном firewall открываем порт 22:
+firewall-cmd --add-port 22/tcp --permanent
+firewall-cmd --reload
