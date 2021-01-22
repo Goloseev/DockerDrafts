@@ -20,4 +20,3 @@ https://postgrespro.ru/docs/postgrespro/13/binary-installation-on-windows#CONFIG
 
 После запуска службы ваш экземпляр Postgres Pro готов к использованию. Если вам нужны дополнительные расширения Postgres Pro, установите их в новом экземпляре, как описывается в Разделе 16.3.
 
-1
