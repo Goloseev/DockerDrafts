@@ -9,9 +9,12 @@ https://postgrespro.ru/docs/postgrespro/13/binary-installation-on-windows#CONFIG
     Запустите программу initdb, передав ей полный путь к новому каталогу данных и другие параметры, требующиеся для инициализации нового экземпляра сервера. Например:
 
     "C:\Program Files\PostgresPro\13\bin\initdb.exe" --encoding=UTF8 -U "postgres" -D "C:\Program Files\PostgresPro\13\data2"
-    Также вы можете остановить работающий сервер и скопировать содержимое существующего каталога данных в новый каталог. В этом случае новый экземпляр Postgres Pro наследует все свойства исходного экземпляра, включая параметры аутентификации.
-    Установите в postgresql.conf нового экземпляра Postgres Pro требуемые параметры. Обязательно назначьте отдельным экземплярам сервера разные порты во избежание конфликтов.
-    Откройте приглашение командной строки от имени администратора и зарегистрируйте новую службу Postgres Pro с уникальным именем, например, postgrespro-data2:
+    Также вы можете остановить работающий сервер и скопировать содержимое существующего каталога данных в новый каталог.
+     В этом случае новый экземпляр Postgres Pro наследует все свойства исходного экземпляра, включая параметры аутентификации.
+    Установите в postgresql.conf нового экземпляра Postgres Pro требуемые параметры.
+    Обязательно назначьте отдельным экземплярам сервера разные порты во избежание конфликтов.
+    Откройте приглашение командной строки от имени администратора и зарегистрируйте новую службу
+    Postgres Pro с уникальным именем, например, postgrespro-data2:
 
     "C:\Program Files\PostgresPro\13\bin\pg_ctl.exe" register -N "postgrespro-data2" -U "NT AUTHORITY\NetworkService" -D "C:\Program Files\PostgresPro\13\data2" -w
 
@@ -20,3 +23,9 @@ https://postgrespro.ru/docs/postgrespro/13/binary-installation-on-windows#CONFIG
 
 После запуска службы ваш экземпляр Postgres Pro готов к использованию. Если вам нужны дополнительные расширения Postgres Pro, установите их в новом экземпляре, как описывается в Разделе 16.3.
 
+Попробовал
+cd bin
+.\initdb.exe --encoding=UTF8 -U "postgres" -D "E:\2021_Postgre12_5_3_port6432_DB"
+скопировать содержимое эталонного каталога
+.\pg_ctl.exe register -N "pgsql-12.5-3.1C-x64_DEV_6432" -U "NT AUTHORITY\NetworkService" -D "E:\2021_Postgre12_5_3_port6432_DB" -w
+sc start "pgsql-12.5-3.1C-x64_DEV_6432"
