@@ -45,3 +45,29 @@ sudo add-apt-repository \
 
  Удаление файлов docker
  sudo rm -rf /var/lib/docker
+
+Расшарить папку
+sudo apt-get install -y samba samba-common python-glade2 system-config-samba
+сделаем копию текущих настроек
+это перемещение - плохо!  sudo mv /etc/samba/smb.conf /etc/samba/smb.conf.bak
+sudo cp -f /etc/samba/smb.conf /etc/samba/smb.conf.bak
+
+создадим свои настройки
+sudo vi /etc/samba/smb.conf
+
+sudo chmod -R 0755 allaccess
+sudo chown -R nobody:nogroup allaccess/
+
+[AllAccess]
+path = /samba/allaccess
+browsable = yes
+writable = yes
+guest ok = yes
+read only = no
+
+ sudo systemctl restart samba
+
+ realpath
+ firewall-cmd --permanent --add-service=samba
+firewall-cmd --reload
+
