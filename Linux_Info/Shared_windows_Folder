@@ -1,0 +1,38 @@
+подключение сетевого каталога
+http://uraganltd.blogspot.com/2019/03/linux_28.html
+apt-get install cifs-utils -y
+mkdir /mnt/Shared_Folder_On_L
+mount -t cifs //192.168.88.251/Shared_on_L /mnt/Shared_Folder_On_L -o username=SharedFolders,password=Jnrhsnm1,domain=salf-net
+Если используются русские буквы или пробел в имени сетевой папки,
+надо весь путь заключить в кавычки «//192.168.0.1/Документы»
+mount -t cifs //192.168.88.251/Shared_on_L /mnt/Shared_Folder_On_L -o username=SharedFolders,password=Jnrhsnm1,domain=salf-net,iocharset=utf8,file_mode=0777,dir_mode=0777
+Отключить сетевую папку
+umount //192.168.88.251/Shared_on_l   или umount /mnt/Shared_Folder_On_L
+
+Для автоматического подключения сетевого каталога при загрузке
+vim /root/.smbuser
+username=winuser
+password=winpassword
+domain=salf-net
+
+#chmod 400 /root/.smbuser
+
+cp /etc/fstab /etc/fstab.bak -f
+vim /etc/fstab
+Есть право у простых пользователей на запись если
+//192.168.88.251/Shared_on_L /mnt/Shared_Folder_On_L  cifs credentials=/root/.smbuser,iocharset=utf8,sec=ntlmv2,vers=2.1,dir_mode=0777,file_mode=0777 0 0
+
+для подключения гостем
+//192.168.1.10/share    /mnt    cifs    guest    0 0
+
+смонтировать то что указанно в файле
+mount -a демонтировать umount -a
+
+посмотреть что смонтированно
+df -h
+
+Если мы будем монтировать сетевую папку, сервер которой находится за брандмауэром, необходимо открыть следующие порты:
+137/UDP
+138/UDP
+139/TCP
+445/TCP

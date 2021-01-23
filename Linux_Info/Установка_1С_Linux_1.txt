@@ -71,3 +71,12 @@ read only = no
  firewall-cmd --permanent --add-service=samba
 firewall-cmd --reload
 
+просмотр сетевых каталогов
+smbtree
+
+
+
+| grep -A 1 "enp0s3:"
+
+
+
