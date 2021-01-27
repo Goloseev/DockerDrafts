@@ -34,5 +34,3 @@ sudo add-apt-repository \
  sudo rm -rf /var/lib/docker
 
 
-Remove all volumes
-$ docker volume prune

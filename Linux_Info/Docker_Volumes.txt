@@ -1,0 +1,99 @@
+good info https://devopsheaven.com/docker/docker-compose/volumes/2018/01/16/volumes-in-docker-compose.html
+
+docker volume create --opt type=none --opt device=<host path> --opt o=bind
+
+#----------------------------------------------
+my-named-volume:
+     driver_opts:
+           type: none
+           device: /home/full/path #NOTE needs full path (~ doesn't work)
+           o: bind
+#----------------------------------------------
+logs-directory:
+  driver_opts:
+    type: none
+    device: ${PWD}/logs
+    o: bind
+
+#----------------------------------------------
+version '3'
+
+volumes:
+  web_data:
+
+services:
+  app:
+    image: nginx:alpine
+    ports:
+      - 80:80
+    volumes:
+      - web_data:/usr/share/nginx/html:ro
+
+
+    TIP 1: From Docker Compose version 3.4 the name of the volume can be dynamically generated from environment variables placed in an .env file (this file has to be in the same folder as docker-compose.yml is).
+
+    TIP 2: To increase the security in our system we can mount the volume as read-only if the container only needs to read the mounted files. This will prevent an attacker to modify or create new files in the host of the server for example.
+Example of .env file:
+
+#----------------------------------------------
+VOLUME_ID=my_volume_001
+
+
+#----------------------------------------------
+Remove all volumes  $ docker volume prune
+
+
+
+#----------------------------------------------
+Container size on disk   docker ps -s
+
+#----------------------------------------------
+# Пример
+Volumes
+version: '3'
+services:
+  worker:
+    ...
+    volumes:
+      - common_code:/application/path
+  different-worker:
+    ...
+    volumes:
+      - common_code:/different/application/path
+volumes:
+  - type: bind #or volume
+    name: common_code
+    source: /local/path
+    target: /data  #may be off
+    volume:
+         copy_on: start # or up or empty or false
+data_app:
+    driver: local
+    driver_opts:
+      type: none
+      device: ${PWD}
+      o: bind
+  data_web:
+    driver: local
+    driver_opts:
+      type: none
+      device: ${PWD}/docker_files/nginx_conf
+      o: bind
+  database: #version: '3.5'
+    driver: local
+    driver_opts:
+      type: none
+      device: ${PWD}/mnt/database # $PWD is only available on linux based systems (Linux, MacOs), Windows might need absolute paths
+      o: bind
+
+#----------------------------------------------
+named volumes with a custom storage location
+This is the topic being discussed here.
+In step 1. of the previous section, you create a volume using the local volume driver, but pass "mount" options to customize the storage location of the volume (see #19990 (comment) https://github.com/moby/moby/issues/19990#issuecomment-248955005)
+Also see docker/compose#2957 (comment) https://github.com/docker/compose/issues/2957#issuecomment-437321317,
+which goes a bit deeper into "what happens under the hood"
+#----------------------------------------------
+
+#----------------------------------------------
+
+#----------------------------------------------
