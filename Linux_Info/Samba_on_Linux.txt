@@ -1,0 +1,32 @@
+Расшарить папку
+sudo apt-get install -y samba samba-common python-glade2 system-config-samba
+сделаем копию текущих настроек
+sudo cp -f /etc/samba/smb.conf /etc/samba/smb.conf.bak
+
+создадим свои настройки
+sudo vim /etc/samba/smb.conf
+
+sudo chmod -R 0755 allaccess
+sudo chown -R nobody:nogroup allaccess/
+
+[AllAccess]
+path = /samba/allaccess
+browsable = yes
+writable = yes
+guest ok = yes
+read only = no
+
+ sudo systemctl restart samba
+
+ realpath
+firewall-cmd --permanent --add-service=samba
+firewall-cmd --reload
+
+137/UDP
+138/UDP
+139/TCP
+445/TCP
+
+
+просмотр сетевых каталогов
+smbtree

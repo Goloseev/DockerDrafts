@@ -1,0 +1,8 @@
+Для удобства ввода команд для последующей установки необходимо установить OpenSSH-сервер:
+sudo apt-get install openssh-server -y
+sudo restart ssh
+
+При активированном firewall открываем порт 22:
+apt install firewalld -y
+firewall-cmd --add-port 22/tcp --permanent
+firewall-cmd --reload
