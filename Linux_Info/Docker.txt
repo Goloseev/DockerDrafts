@@ -33,3 +33,6 @@ sudo add-apt-repository \
  Удаление файлов docker
  sudo rm -rf /var/lib/docker
 
+
+Remove all volumes
+$ docker volume prune
