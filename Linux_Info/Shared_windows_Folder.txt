@@ -1,8 +1,8 @@
 подключение сетевого каталога
 http://uraganltd.blogspot.com/2019/03/linux_28.html
 apt-get install cifs-utils -y
-mkdir /mnt/Shared_Folder_On_L
-mount -t cifs //192.168.88.251/Shared_on_L /mnt/Shared_Folder_On_L -o username=SharedFolders,password=Jnrhsnm1,domain=salf-net
+mkdir /mnt/Net_Shared_on_L
+mount -t cifs //192.168.88.251/Shared_on_L /mnt/Net_Shared_on_L -o username=SharedFolders,password=Jnrhsnm1,domain=salf-net
 Если используются русские буквы или пробел в имени сетевой папки,
 надо весь путь заключить в кавычки «//192.168.0.1/Документы»
 mount -t cifs //192.168.88.251/Shared_on_L /mnt/Shared_Folder_On_L -o username=SharedFolders,password=Jnrhsnm1,domain=salf-net,iocharset=utf8,file_mode=0777,dir_mode=0777

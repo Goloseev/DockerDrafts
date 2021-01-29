@@ -16,7 +16,7 @@ writable = yes
 guest ok = yes
 read only = no
 
- sudo systemctl restart samba
+ sudo systemctl restart samba/smbd.service
 
  realpath
 firewall-cmd --permanent --add-service=samba
