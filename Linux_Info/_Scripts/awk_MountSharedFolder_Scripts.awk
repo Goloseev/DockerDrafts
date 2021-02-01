@@ -1,8 +1,7 @@
 BEGIN {
-	print "--------Let i show home dir in passwd file---------------"
+	SectionName = "_Scripts_on_RED"
+	print "--------PUBLISHING " + SectionName + " IN FSTAB---------------"
 	print "---------------------------------------------------------"
-	print "user\t\t\thome path"
-	pring "------ \t\t\t ----------"
 	FS=":"
 	OFS="\t\t\t"
 }
