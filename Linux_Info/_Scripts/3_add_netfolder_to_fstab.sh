@@ -1,37 +1,39 @@
-echo "   --- Запускаю 3_add_netfolder_to_fstab.sh /n -----------------------------"
-NORMAL='\033[0m'
-BOLD='\033[1m'
-
-echoRED "some text"
-echoBLUE BLUE text
-echoGREEN GREEN text
-echo white text
-
-
-echo -ne $RED red $GREEN green $NORMAL normal
+echoBLUE "Запускаю 3_add_netfolder_to_fstab.sh"
 
 smbuser_file_path="/root/.smbuser_for_red.conf"
+
+
+VAR=$(isFile)
+
+echo VAR=$VAR
+
+#тест
+rm $smbuser_file_path
+
+
+if (( EUID != 0 )); then
+	echoRED "скрипт должен запускаться под root правами"
+   	return
+fi
+
 if test -f "$smbuser_file_path"; then 
-    echo "   --- Файл $smbuser_file_path уже существует"
-    echo "   --- менять его не считаю допустимым - сделайте это вручную"
-    allowed_file_creation=false
-else
-   echo "   --- Файла $smbuser_file_path пока нет"
-   allowed_file_creation=true
+    echoRED "Файл $smbuser_file_path уже существует"
+    echoRED "перезапись файла невозможна"
+    return
 fi
 
-echo "   --- получил allowed_file_creation=$allowed_file_creation"
+echoBLUE "Создаю файл: $smbuser_file_path"
+touch $smbuser_file_path
 
-if [ "$allowed_file_creation" = true ]; then
-	echo "   --- Создаю файл: $smbuser_file_path"
-	touch $smbuser_file_path
-fi
-
-echo "   --- скрипт завершен"
+echoBLUE "скрипт завершен"
 
 
 
-
+isFile(){
+	#if test -f "$1"; then res=1; else res=0
+	#return 134;
+	echo SomeResult
+	}
 
 echoRED(){
         RED='\033[0;31m'         #  ${RED}
